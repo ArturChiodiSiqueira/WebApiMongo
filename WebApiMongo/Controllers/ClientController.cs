@@ -32,6 +32,24 @@ namespace WebApiMongo.Controllers
             return Ok(client);
         }
 
+        [HttpGet("GetClientEnd")]
+        public ActionResult<Client> GetEnd(string id)
+        {
+            var client = _clientService.Get();
+            var client1 = client.Find(client => client.Address.Id == id);
+            if (client1 == null) return NotFound();
+            return Ok(client1);
+        }
+
+        [HttpGet("GetClientName")]
+        public ActionResult<Client> GetName(string name)
+        {
+            var client = _clientService.Get();
+            var client1 = client.Find(client => client.Name == name);
+            if (client1 == null) return NotFound();
+            return Ok(client1);
+        }
+
         [HttpPost]
         public ActionResult<Client> Create(Client client)
         {
