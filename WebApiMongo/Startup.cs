@@ -39,6 +39,7 @@ namespace WebApiMongo
             services.AddSingleton<IDatabaseSettings>(sp => sp.GetRequiredService<IOptions<DatabaseSettings>>().Value);
 
             services.AddSingleton<ClientServices>();
+            services.AddSingleton<AddressServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
