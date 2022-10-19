@@ -27,8 +27,7 @@ namespace WebApiMongo.Controllers
             if (client == null)
                 return NotFound();
 
-            //return Ok(client);
-            return client;
+            return Ok(client);
         }
 
         [HttpPost]
@@ -36,6 +35,32 @@ namespace WebApiMongo.Controllers
         {
             _clientService.Create(client);
             return CreatedAtRoute("GetClient", new { id = client.Id.ToString() }, client);
+        }
+
+        [HttpPut]
+        public ActionResult<Client> Update(Client clientIn, string id)
+        {
+            var client = _clientService.Get(id);
+
+            if (client == null)
+                return NotFound();
+
+            _clientService.Update(id, clientIn);
+
+            return NoContent();
+        }
+
+        [HttpDelete]
+        public ActionResult Delete(string id)
+        {
+            var client = _clientService.Get(id);
+
+            if (client == null)
+                return NotFound();
+
+            _clientService.Remove(client);
+
+            return NoContent();
         }
     }
 }
