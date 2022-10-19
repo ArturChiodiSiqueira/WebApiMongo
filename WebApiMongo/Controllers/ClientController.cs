@@ -11,10 +11,12 @@ namespace WebApiMongo.Controllers
     public class ClientController : ControllerBase
     {
         private readonly ClientServices _clientService;
+        private readonly AddressServices _addressService;
 
-        public ClientController(ClientServices clientService)
+        public ClientController(ClientServices clientService, AddressServices addressService)
         {
             _clientService = clientService;
+            _addressService = addressService;
         }
 
         [HttpGet]
@@ -33,6 +35,9 @@ namespace WebApiMongo.Controllers
         [HttpPost]
         public ActionResult<Client> Create(Client client)
         {
+            Address address = _addressService.Create(client.Address);
+            client.Address = address;
+
             _clientService.Create(client);
             return CreatedAtRoute("GetClient", new { id = client.Id.ToString() }, client);
         }

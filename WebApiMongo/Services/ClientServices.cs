@@ -8,6 +8,7 @@ namespace WebApiMongo.Services
     public class ClientServices
     {
         private readonly IMongoCollection<Client> _clients;
+        //private readonly IMongoCollection<Address> _address;
 
         public ClientServices(IDatabaseSettings settings)
         {
