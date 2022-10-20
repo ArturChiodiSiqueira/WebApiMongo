@@ -32,8 +32,8 @@ namespace WebApiMongo.Controllers
             return Ok(client);
         }
 
-        [HttpGet("GetClientEnd")]
-        public ActionResult<Client> GetEnd(string id)
+        [HttpGet("GetClientAddress")]
+        public ActionResult<Client> GetAdd(string id)
         {
             var client = _clientService.Get();
             var client1 = client.Find(client => client.Address.Id == id);
